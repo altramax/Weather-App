@@ -28,15 +28,25 @@ const months = [ "January", "February", "March",
 
  const ApiKey = "49cc8c821cd2aff9af04c9f98c36eb74";
  
+//  to update data 
  function getWeather(response){
+  // current weather
    Currentlocation.textContent = response.timezone
    latLng.textContent = `${response.lat}N ${response.lon}E`
+   temperature.innerHTML = `${Math.trunc(response.current.temp)}&#8451;`
+   description.textContent = response.current.weather[0].description;
+   image.innerHTML =`<img class="m-auto" src="http://openweathermap.org/img/wn/${response.current.weather[0].icon}.png" alt="">`;
+   humidity.textContent = `${response.current.humidity}%`
+   windSpeed.textContent = `${response.current.wind_speed}`
+   let sunrises = response.current.sunset;
+   sunRise.innerHTML = `<div>${window.moment(sunrises*1000).format('HH:mm a')}</div>`
 
- 
+
+// console.log(window.moment(sunrises*1000).format());  
 }
 
 
-
+// get location and call api 
  navigator.geolocation.getCurrentPosition(success => {
   let {longitude, latitude} = success.coords
 

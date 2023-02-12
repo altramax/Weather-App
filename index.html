@@ -22,8 +22,10 @@
         <div class="text-center">
             <span  id="temperature" class="text-6xl md:text-7xl">29&#8451;</span>
             <p id="description" class="text-xl md:text-2xl"> Scattered Clouds</p>
-            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" id="weather-img" 
-            class="m-auto mt-[-1rem]">
+            <div id="weather-img" >
+             <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" class="m-auto mt-[-1rem]"> 
+            </div>
+            
         </div>
         <div id="current-weather--forcast" 
         class="my-6 bg-[#000] bg-opacity-[0.2] text-[#fff] text-[1.3rem]
@@ -65,8 +67,8 @@
                     <p id="description" class="text-[1.2rem] md:text-xl"> Scattered Clouds</p>
                 </div>
                 <div class="flex flex-col items-center">
-                <p id="day">Friday</p>
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" id="weather-img" class="mt-[-1rem]">
+                    <p id="day">Friday</p>
+                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" id="weather-img" class="mt-[-1rem]">
                 </div>
             </div>
             <div class="">
@@ -327,7 +329,12 @@
     
         
     </div>
-  
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+     integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="index.js"></script>
 </body>
 </html>
