@@ -30,7 +30,7 @@ const months = [ "January", "February", "March",
  const ApiKey = "49cc8c821cd2aff9af04c9f98c36eb74";
  
 //  to update data 
-let Forcast = ""
+let Forcast = "";
  function getWeather(data){
   // current weather
    Currentlocation.textContent = data.timezone
