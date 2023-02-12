@@ -1,5 +1,5 @@
 const currentTime = document.getElementById('time');
-const currentdate = document.getElementById('click');
+const currentdate = document.getElementById('date');
 const Currentlocation = document.getElementById('location');
 const temperature = document.getElementById('temperature');
 const description = document.getElementById('description');
@@ -8,7 +8,7 @@ const humidity = document.getElementById('humidity');
 const windSpeed = document.getElementById('wind-speed');
 const sunRise = document.getElementById('sunrise');
 const sunSet = document.getElementById("sunset");
-const futureForecast = document.getElementById('future-forcast');
+const futureWeathercast = document.getElementById('future-forcast');
 const latLng = document.getElementById('lat-lng');
 
 const months = [ "January", "February", "March",
@@ -21,7 +21,8 @@ const months = [ "January", "February", "March",
     let minutes = time.getMinutes();
     let ampm = time.getHours() >= 12 ? "PM" : "AM" ;
     let day =  `${days[ time.getDay()]} ${time.getDate()}, ${months[time.getMonth()]}`;
-
+  
+    currentdate.textContent = day;
     currentTime.innerHTML = `<div>${hour < 10 ? "0" + hour : hour}:
     ${minutes < 10 ? "0" + minutes : minutes}<small class="text-2xl">  ${ampm}</small></div> `
   }, 1000);
@@ -29,20 +30,87 @@ const months = [ "January", "February", "March",
  const ApiKey = "49cc8c821cd2aff9af04c9f98c36eb74";
  
 //  to update data 
- function getWeather(response){
+let Forcast;
+ function getWeather(data){
   // current weather
-   Currentlocation.textContent = response.timezone
-   latLng.textContent = `${response.lat}N ${response.lon}E`
-   temperature.innerHTML = `${Math.trunc(response.current.temp)}&#8451;`
-   description.textContent = response.current.weather[0].description;
-   image.innerHTML =`<img class="m-auto" src="http://openweathermap.org/img/wn/${response.current.weather[0].icon}.png" alt="">`;
-   humidity.textContent = `${response.current.humidity}%`
-   windSpeed.textContent = `${response.current.wind_speed}`
-   let sunrises = response.current.sunset;
-   sunRise.innerHTML = `<div>${window.moment(sunrises*1000).format('HH:mm a')}</div>`
+   Currentlocation.textContent = data.timezone
+   latLng.textContent = `${data.lat}N ${data.lon}E`
+   temperature.innerHTML = `${Math.trunc(data.current.temp)}&#8451;`
+   description.textContent = data.current.weather[0].description;
+   image.innerHTML =`<img class="m-auto" src="http://openweathermap.org/img/wn/${data.current.weather[0].icon}.png" alt="">`;
+   humidity.textContent = `${data.current.humidity}%`
+   windSpeed.textContent = `${data.current.wind_speed}`
+   let currentSunrises = data.current.sunrise;
+   let currentSunsets = data.current.sunset;
+   sunRise.innerHTML = `<div>${window.moment(currentSunrises * 1000).format('HH:mm a')}</div>`
+   sunSet.innerHTML = `<div>${window.moment(currentSunsets * 1000).format('HH:mm a')}</div>`
+
+// console.log(currentSunrises);
+
+let futureForcast =  data.daily
+
+futureForcast.forEach((future, i) => {
+
+let weekday = i >= 8 ? i - 8 : i ;
+let futureSunrise = future.sunrise;
+let futureSunset = future.sunset;
 
 
-// console.log(window.moment(sunrises*1000).format());  
+
+  Forcast += ` 
+<div id="future-weather--forcast" 
+  class="my-[2rem] bg-[#004F6B] bg-opacity-[0.5] text-[#fff]
+  border-[1px] text-[1.3rem] m-[2rem] p-4 rounded-[1rem]  w-[20rem] md:w-[25rem]">
+  <div class="flex justify-between items-center">
+      <div>
+          <p>Day</p>
+          <span  id="temperature" class="text-5xl md:text-6xl">${future.temp.day}&#8451;</span>
+          <p id="description" class="text-[1.2rem] md:text-xl mb-[1rem]">${future.weather[0].description}</p>
+      </div>
+      <div class="flex flex-col items-center">
+          <p id="day">${days[weekday]}</p>
+          <img src="http://openweathermap.org/img/wn/${future.weather[0].icon}.png" alt="" id="weather-img" class="mt-[-1rem]">
+      </div>
+  </div>
+  <div class="">
+      <div class="flex justify-between py-2 w-[15rem] md:w-[23rem]">
+          <div>Humidity</div>
+          <div id="humidity">${future.humidity}%</div>
+      </div>
+      <div class="flex justify-between py-2">
+          <div>Wind Speed</div>
+          <div id="wind-speed">${future.wind_speed}</div>
+      </div>
+      <div class="flex justify-between py-2">
+          <div>Sunrise</div> 
+          <div id="sunrise">${window.moment(futureSunrise * 1000).format('HH:mm a')}</div>
+      </div>
+      <div class="flex justify-between py-2">
+          <div>Sunset</div>
+          <div id="sunset">${window.moment(futureSunset * 1000).format('HH:mm a')}</div>
+      </div>
+  </div>
+</div>`
+
+
+futureWeathercast.innerHTML = Forcast;
+
+console.log(futureForcast);
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 
