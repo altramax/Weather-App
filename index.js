@@ -30,12 +30,12 @@ const months = [ "January", "February", "March",
  const ApiKey = "49cc8c821cd2aff9af04c9f98c36eb74";
  
 //  to update data 
-let Forcast;
+let Forcast = ""
  function getWeather(data){
   // current weather
    Currentlocation.textContent = data.timezone
    latLng.textContent = `${data.lat}N ${data.lon}E`
-   temperature.innerHTML = `${Math.trunc(data.current.temp)}&#8451;`
+   temperature.innerHTML = `${Math.floor(data.current.temp)}&#8451;`
    description.textContent = data.current.weather[0].description;
    image.innerHTML =`<img class="m-auto" src="http://openweathermap.org/img/wn/${data.current.weather[0].icon}.png" alt="">`;
    humidity.textContent = `${data.current.humidity}%`
@@ -45,17 +45,15 @@ let Forcast;
    sunRise.innerHTML = `<div>${window.moment(currentSunrises * 1000).format('HH:mm a')}</div>`
    sunSet.innerHTML = `<div>${window.moment(currentSunsets * 1000).format('HH:mm a')}</div>`
 
-// console.log(currentSunrises);
+
 
 let futureForcast =  data.daily
 
 futureForcast.forEach((future, i) => {
 
-let weekday = i >= 8 ? i - 8 : i ;
+let weekday = i >= 7 ? i - 7 : i ;
 let futureSunrise = future.sunrise;
 let futureSunset = future.sunset;
-
-
 
   Forcast += ` 
 <div id="future-weather--forcast" 
@@ -64,12 +62,12 @@ let futureSunset = future.sunset;
   <div class="flex justify-between items-center">
       <div>
           <p>Day</p>
-          <span  id="temperature" class="text-5xl md:text-6xl">${future.temp.day}&#8451;</span>
+          <span  id="temperature" class="text-5xl md:text-6xl">${Math.floor(future.temp.day)}&#8451;</span>
           <p id="description" class="text-[1.2rem] md:text-xl mb-[1rem]">${future.weather[0].description}</p>
       </div>
       <div class="flex flex-col items-center">
           <p id="day">${days[weekday]}</p>
-          <img src="http://openweathermap.org/img/wn/${future.weather[0].icon}.png" alt="" id="weather-img" class="mt-[-1rem]">
+          <img src="http://openweathermap.org/img/wn/${future.weather[0].icon}.png" alt="" id="weather-img" class="mt-[-0.5rem]">
       </div>
   </div>
   <div class="">
@@ -92,25 +90,8 @@ let futureSunset = future.sunset;
   </div>
 </div>`
 
-
 futureWeathercast.innerHTML = Forcast;
-
-console.log(futureForcast);
-
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 
@@ -118,10 +99,8 @@ console.log(futureForcast);
  navigator.geolocation.getCurrentPosition(success => {
   let {longitude, latitude} = success.coords
 
-  
   fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${ApiKey}`)
   .then(res => res.json().then(data =>{console.log(data); getWeather(data)}))  
-
 })
 
 
