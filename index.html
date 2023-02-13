@@ -49,9 +49,41 @@
             </div>
         </div>
 
-        <div id="future-forcast" class="flex justify-start w-[100%] bg-[#004F6B] bg-opacity-[0.5] p-[1rem] mt-[5rem] overflow-x-scroll">
-         
+    <div id="future-forcast" class="flex justify-start w-[100%] bg-[#004F6B] bg-opacity-[0.5] p-[1rem] mt-[5rem] overflow-x-scroll">
+
+            <div id="current-weather--forcast" 
+            class="my-[2rem] bg-[#004F6B] bg-opacity-[0.5] text-[#fff]
+            border-[1px] text-[1.3rem] m-[2rem] p-4 rounded-[1rem]  w-[20rem] md:w-[25rem]">
+            <div class="flex justify-between">
+                <div>
+                    <span  id="temperature" class="text-5xl md:text-6xl">29&#8451;</span>
+                    <p id="description" class="text-[1.2rem] md:text-xl"> Scattered Clouds</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <p id="day">Friday</p>
+                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" id="weather-img" class="mt-[-1rem]">
+                </div>
+            </div>
+            <div class="">
+                <div class="flex justify-between py-2 w-[15rem] md:w-[23rem]">
+                    <div>Humidity</div>
+                    <div id="humidity" >62%</div>
+                </div>
+                <div class="flex justify-between py-2">
+                    <div>Wind Speed</div>
+                    <div id="wind-speed">3.6</div>
+                </div>
+                <div class="flex justify-between py-2">
+                    <div>Sunrise</div> 
+                    <div id="sunrise">05:50 am</div>
+                </div>
+                <div class="flex justify-between py-2">
+                    <div>Sunset</div>
+                    <div id="sunset">07:20 pm</div>
+                </div>
+            </div>
         </div>
+    </div>
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
