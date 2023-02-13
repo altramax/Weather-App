@@ -14,7 +14,7 @@ const latLng = document.getElementById('lat-lng');
 const months = [ "January", "February", "March",
  "April", "May", "June", "July", "August", "September", "October", "November", "December"]
  const days = ["Sunday","Monday", "Tuesday"," Wednesday", "Thursday", "Friday", "Saturday"]
-
+let r = 0;
    const timeSetting = setInterval(() => {
     let time = new Date()
     let hour = time.getHours() >= 12 ? time.getHours() - 12 : time.getHours();
@@ -54,7 +54,7 @@ futureForcast.forEach((future, i) => {
 
     let time = new Date();
     let day = time.getDay();
-    let r = 0;
+    
 
     if(i === 0){
     r = day
