@@ -8,14 +8,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-[url('./bg.jpg')] bg-cover bg-no-repeat">
-    <header class="md:flex justify-between">
+    <header class="md:flex md:justify-between">
         <div class="p-6 md:p-12">
             <div id="time" class="text-5xl md:text-6xl">02:48</div>
             <div id="date" class="text-xl md:text-2xl">Saturday, 11 Feb</div>
         </div>
-        <div class="text-center md:p-12">
-            <div id="location" class="text-[1.2rem] md:text-2xl">America/Australia</div>
-            <div id="lat-lng" class="">N</div>
+        <div class="text-center md:p-12 mb-[1rem]">
+            <span class="text-2">Time Zone</span>
+            <div id="location" class="text-[1.4rem] md:text-3xl mt-[-0.4rem]">America/Australia</div>
+            <small id="lat-lng" class="">N</small>
         </div>
     </header>
     <main class="overflow-x-none">
