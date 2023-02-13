@@ -49,17 +49,17 @@ let Forcast = "";
 
 let futureForcast =  data.daily
 
-let g = 1;
+
 futureForcast.forEach((future, i) => {
 
     let time = new Date();
     let day = time.getDay();
-    let r;
+    let r = 0;
 
     if(i === 0){
     r = day
     }else{
-      r = g + i
+      r += i
     }
 
 let futureDays = r < 7 ? r :  r - 7;
