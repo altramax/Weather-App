@@ -49,9 +49,20 @@ let Forcast = "";
 
 let futureForcast =  data.daily
 
+let g = 1;
 futureForcast.forEach((future, i) => {
 
-let weekday = i >= 7 ? i - 7 : i ;
+    let time = new Date();
+    let day = time.getDay();
+    let r;
+
+    if(i === 0){
+    r = day
+    }else{
+      r = g + i
+    }
+
+let futureDays = r < 7 ? r :  r - 7;
 let futureSunrise = future.sunrise;
 let futureSunset = future.sunset;
 
@@ -66,7 +77,7 @@ let futureSunset = future.sunset;
           <p id="description" class="text-[1.2rem] md:text-xl mb-[1rem]">${future.weather[0].description}</p>
       </div>
       <div class="flex flex-col items-center">
-          <p id="day">${days[weekday]}</p>
+          <p id="day">${days[futureDays]}</p>
           <img src="http://openweathermap.org/img/wn/${future.weather[0].icon}.png" alt="" id="weather-img" class="mt-[-0.5rem]">
       </div>
   </div>
@@ -93,7 +104,6 @@ let futureSunset = future.sunset;
 futureWeathercast.innerHTML = Forcast;
 })
 }
-
 
 // get location and call api 
  navigator.geolocation.getCurrentPosition(success => {
