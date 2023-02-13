@@ -58,8 +58,8 @@ futureForcast.forEach((future, i) => {
 
     if(i === 0){
     r = day
-    }elseif(i > 0){
-      r = i + r
+    }else if(i > 0){
+      r = r + i
     }
 
 let futureDays = r < 7 ? r :  r - 7;
